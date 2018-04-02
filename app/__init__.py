@@ -82,11 +82,10 @@ app = Flask(__name__)
 
 @app.route('/postjson', methods = ['POST'])
 def postJsonHandler():
-    print (request.is_json)
-    content = request.get_json()
-    print(content['url'])
-    sens = textCnn(content['url'])
-    fs = FrequencySummarizer()
-    summary = fs.summarize(sens, 4)
-    return jsonify(summary)
-
+    urls = request.get_json()
+    summaries = []
+    for url in urls:
+        sens = textCnn(url)
+        fs = FrequencySummarizer()
+        summaries.append(fs.summarize(sens, 4))
+    return jsonify(summaries)

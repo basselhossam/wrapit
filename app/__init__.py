@@ -1,5 +1,6 @@
 from flask import Flask
-# Import the apis
-from app import apis
 
 app = Flask(__name__)
+
+# Import the apis
+from app import apis

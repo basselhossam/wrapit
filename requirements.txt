@@ -1,3 +1,5 @@
+tldextract
+newsapi-python
 nltk
 bs4
 flask

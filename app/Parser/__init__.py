@@ -1,11 +1,12 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
-from urllib.parse import urlsplit
+import tldextract
 
 
 def parse(url):
-    netloc = "{0.netloc}".format(urlsplit(url))
-    if netloc == "edition.cnn.com":
+    extracted = tldextract.extract(url)
+    netloc = "{}.{}".format(extracted.domain, extracted.suffix)
+    if netloc == "cnn.com":
         return textCnn(url)
 
 

@@ -21,4 +21,4 @@ def summarize():
 def getnews():
     api = NewsSources()
     articles = api.getNewsFromSources()
-    return articles
+    return jsonify(articles)

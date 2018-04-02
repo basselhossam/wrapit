@@ -10,7 +10,6 @@ def summarize():
     urls = request.get_json()
     summaries = []
     for url in urls:
-        print(url)
         sens = parse(url)
         fs = FrequencySummarizer()
         summaries.append(fs.summarize(sens, 4))

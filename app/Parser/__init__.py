@@ -4,10 +4,8 @@ from urllib.parse import urlsplit
 
 
 def parse(url):
-    netloc = "{0.netloc}/".format(urlsplit(url))
-    print(netloc)
+    netloc = "{0.netloc}".format(urlsplit(url))
     if netloc == "edition.cnn.com":
-        print("CNN True")
         return textCnn(url)
 
 

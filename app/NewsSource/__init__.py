@@ -7,4 +7,4 @@ class NewsSources:
         self.news_api = NewsApiClient(api_key=newsApiKey)
 
     def getNewsFromSources(self):
-        return self.news_api.get_everything(sources=sourcesList, language=appLanguage)
+        return self.news_api.get_everything(sources=sourcesList, language=appLanguage, page_size=100)

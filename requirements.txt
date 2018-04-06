@@ -1,6 +1,7 @@
 tldextract
 newsapi-python
 nltk
+beautifulsoup4
 bs4
 flask
 gunicorn

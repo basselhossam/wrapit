@@ -30,7 +30,7 @@ class FrequencySummarizer:
             for word in s:
                 if word not in self._stopwords:
                     freq[word] += 1
-        # frequencies normalization and fitering
+        # frequencies normalization and filtering
         m = float(max(freq.values()))
         k=deepcopy(freq)
         for w in k.keys():
@@ -45,7 +45,8 @@ class FrequencySummarizer:
           which represent the summary of text.
         """
         sents = sent_tokenize(text)
-        assert n <= len(sents)
+        if n > len(sents):
+            return False
         word_sent = [word_tokenize(s.lower()) for s in sents]
         self._freq = self._compute_frequencies(word_sent)
         ranking = defaultdict(int)

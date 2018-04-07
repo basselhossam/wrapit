@@ -4,6 +4,7 @@ from flask import request
 from app.FrequencySummarizer import FrequencySummarizer
 from app.Parser import parse
 from app.NewsSource import NewsSources
+from app.DBAdmin import DBManager
 
 
 @app.route('/summarize', methods=['POST'])
@@ -19,6 +20,19 @@ def summarize():
 
 @app.route('/getnews', methods=['GET'])
 def getnews():
+    db = DBManager()
     api = NewsSources()
-    articles = api.getNewsFromSources()
-    return jsonify(articles)
+    newsResponse = api.getNewsFromSources()
+    newArticles = list(set(newsResponse['articlesURLs']) - set(db.getSummarizedArticlesURL()))
+    for url in newArticles:
+        sens = parse(url)
+        fs = FrequencySummarizer()
+        textsum = fs.summarize(sens, 4)
+        if False != textsum:
+            newsResponse['articlesData'][url]["exSummary"] = textsum
+        else:
+            del newsResponse['articlesData'][url]
+    ret = {'status': 'Failed'}
+    if db.addArticles(newsResponse['articlesData'].values()):
+        ret = {'status': 'ok', 'summarizedCount': len(newsResponse['articlesData'].values())}
+    return jsonify(ret)

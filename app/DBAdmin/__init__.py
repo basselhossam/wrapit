@@ -1,15 +1,13 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
-import os
+from app.config import firebaseAuth
 
 
 class DBManager:
     def __init__(self):
-        APP_ROOT = os.path.dirname(os.path.abspath(__file__))  # refers to application_top
         try:
-            # Fetch the service account key JSON file contents
-            cred = credentials.Certificate(APP_ROOT + '/firebaseKey.json')
+            cred = credentials.Certificate(firebaseAuth)
 
             # Initialize the app with a service account, granting admin privileges
             firebase_admin.initialize_app(cred, {

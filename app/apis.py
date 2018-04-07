@@ -41,3 +41,8 @@ def getnews():
 def getSummarizedArticles():
     db = DBManager()
     return jsonify(db.getSummarizedArticles())
+
+@app.route('/getsources', methods=['GET'])
+def getSources():
+    db = DBManager()
+    return jsonify(db.getSources())

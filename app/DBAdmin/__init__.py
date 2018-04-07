@@ -7,6 +7,7 @@ from app.config import firebaseAuth
 class DBManager:
     def __init__(self):
         try:
+            print(firebaseAuth)
             cred = credentials.Certificate(firebaseAuth)
 
             # Initialize the app with a service account, granting admin privileges

@@ -36,3 +36,8 @@ def getnews():
     if db.addArticles(newsResponse['articlesData'].values()):
         ret = {'status': 'ok', 'summarizedCount': len(newsResponse['articlesData'].values())}
     return jsonify(ret)
+
+@app.route('/getsummarizedarticles', methods=['GET'])
+def getSummarizedArticles():
+    db = DBManager()
+    return jsonify(db.getSummarizedArticles())

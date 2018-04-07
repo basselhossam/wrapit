@@ -48,6 +48,3 @@ class DBManager:
         for val in dbSourcesList:
             sourcesList = sourcesList + val['newsApiID'] + ','
         return sourcesList[:-1]
-
-db = DBManager()
-print(db.getSources())

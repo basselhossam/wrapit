@@ -20,22 +20,27 @@ class DBManager:
             self.ref = db.reference('/')
 
     def addArticles(self,articlesList):
-        posts_ref = self.ref.child('articles')
         for article in articlesList:
+            posts_ref = self.ref.child('articles/' + article.newsApiID)
             posts_ref.push().set(article)
         return True
 
     def getSummarizedArticles(self):
-        posts_ref = self.ref.child('articles')
-        return posts_ref.get()
+        sources_ref = self.ref.child('sources')
+        dbSourcesList = sources_ref.get()
+        articles = {}
+        for val in dbSourcesList:
+            articles[val['name']] = val['articles']
+        return articles
 
     def getSummarizedArticlesURL(self):
-        posts_ref = self.ref.child('articles')
-        articlesList = posts_ref.get()
-        articlesURLs = []
-        for key in articlesList:
-            articlesURLs.append(articlesList[key]['url'])
-        return articlesURLs
+        sources_ref = self.ref.child('sources')
+        dbSourcesList = sources_ref.get()
+        articles = []
+        for val in dbSourcesList:
+            for key in val['articles']:
+                articles.append(val['articles'][key]['url'])
+        return articles
 
     def getSources(self):
         sources_ref = self.ref.child('sources')

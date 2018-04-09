@@ -21,7 +21,7 @@ class DBManager:
 
     def addArticles(self,articlesList):
         for article in articlesList:
-            posts_ref = self.ref.child('articles/' + article['newsApiID'])
+            posts_ref = self.ref.child('sources/' + article['newsApiID'] + '/articles')
             posts_ref.push().set(article)
         return True
 

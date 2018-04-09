@@ -21,7 +21,7 @@ class DBManager:
 
     def addArticles(self,articlesList):
         for article in articlesList:
-            posts_ref = self.ref.child('articles/' + article['newsApiID'])
+            posts_ref = self.ref.child('sources/' + article['newsApiID'])
             posts_ref.push().set(article)
         return True
 
@@ -29,7 +29,7 @@ class DBManager:
         sources_ref = self.ref.child('sources')
         dbSourcesList = sources_ref.get()
         articles = {}
-        for val in dbSourcesList:
+        for sourceKey,val in dbSourcesList:
             articles[val['name']] = val['articles']
         return articles
 
@@ -37,7 +37,7 @@ class DBManager:
         sources_ref = self.ref.child('sources')
         dbSourcesList = sources_ref.get()
         articles = []
-        for val in dbSourcesList:
+        for sourceKey,val in dbSourcesList:
             for key in val['articles']:
                 articles.append(val['articles'][key]['url'])
         return articles
@@ -50,6 +50,6 @@ class DBManager:
         sources_ref = self.ref.child('sources')
         dbSourcesList = sources_ref.get()
         sourcesList = ''
-        for val in dbSourcesList:
-            sourcesList = sourcesList + val['newsApiID'] + ','
+        for key in dbSourcesList:
+            sourcesList = sourcesList + key + ','
         return sourcesList[:-1]

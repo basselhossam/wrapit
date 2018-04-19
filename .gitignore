@@ -1,2 +1,4 @@
 Procfile.windows
 .env
+*.pyc
+/.idea

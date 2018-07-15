@@ -6,3 +6,4 @@ bs4
 flask
 gunicorn
 firebase_admin
+APScheduler==3.0.0

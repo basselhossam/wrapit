@@ -1,23 +1,56 @@
 from bs4 import BeautifulSoup
-from urllib.request import urlopen
-import tldextract
+from urllib import urlopen
 
 
-def parse(url):
-    extracted = tldextract.extract(url)
-    netloc = "{}.{}".format(extracted.domain, extracted.suffix)
-    if netloc == "cnn.com":
-        return textCnn(url)
-
-
-def textCnn(url):
-    final_text = ""
+def parse(newsurl):
+    finaltext = ""
+    category = ""
     try:
-        article = urlopen(url)
+        article = urlopen(newsurl)
         soup = BeautifulSoup(article, 'html.parser')
-        name_box = soup.findAll(attrs={'class': 'zn-body__paragraph'})
+        if "dailymail" in newsurl:
+            name_box = soup.findAll("p", {"class": "mol-para-with-font"})
+        elif "abcnews" in newsurl:
+            name_box = soup.findAll('p')
+        elif "bleacherreport" in newsurl:
+            name_box = soup.findAll('p')
+            category = "sports"
         for child in name_box:
-            final_text += " " + child.text
-        return final_text
+            finaltext += " " + child.text.strip()
+        if "Sports" in newsurl:
+            category = "sports"
+        elif "US" in newsurl:
+            category = "us"
+        elif "International" in newsurl:
+            category = "international"
+        elif "Politics" in newsurl:
+            category = "politics"
+        elif "Technolog" in newsurl:
+            category = "tech"
+        elif "Lifestyle" in newsurl:
+            category = "lifestyle"
+        elif "Entertainment" in newsurl:
+            category = "entertainment"
+        elif "Wellness" in newsurl:
+            category = "health"
+        elif "Health" in newsurl:
+            category = "health"
+        elif "femail" in newsurl:
+            category = "femail"
+        elif "wires" in newsurl:
+            category = "wires"
+        elif "travel" in newsurl:
+            category = "travel"
+        elif "sciencetech" in newsurl:
+            category = "tech"
+        elif "sport" in newsurl:
+            category = "sports"
+        elif "tvshowbiz" in newsurl:
+            category = "tvshowbiz"
+        elif "news" in newsurl:
+            category = "news"
+        elif "health" in newsurl:
+            category = "health"
+        return finaltext, category
     except:
         return ""

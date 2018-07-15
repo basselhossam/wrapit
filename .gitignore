@@ -2,3 +2,4 @@ Procfile.windows
 .env
 *.pyc
 /.idea
+/venv

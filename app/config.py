@@ -2,7 +2,7 @@ import os
 
 newsApiKey = os.environ['newsApiKey']
 appLanguage = "en"
-pageSize = 30
+pageSize = 10
 firebaseAuth = {
   "type": "service_account",
   "project_id": "wrap-it-9f8b4",

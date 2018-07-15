@@ -40,8 +40,9 @@ class DBManager:
         articles = []
         for sourceKey in dbSourcesList:
             val = dbSourcesList[sourceKey]
-            for key in val['articles']:
-                articles.append(val['articles'][key]['url'])
+            if 'articles' in val:
+                for key in val['articles']:
+                    articles.append(val['articles'][key]['url'])
         return articles
 
     def getSources(self):
@@ -54,4 +55,4 @@ class DBManager:
         sourcesList = ''
         for key in dbSourcesList:
             sourcesList = sourcesList + key + ','
-        return sourcesList[:-1]
+        return str(sourcesList[:-1])

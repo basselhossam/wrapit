@@ -26,7 +26,7 @@ def getnews():
         else:
             del newsResponse['articlesData'][url]
     headers = {'content-type': 'application/json'}
-    r = requests.post("https://summarizar.localtunnel.me/api", data=json.dumps(list(newsResponse['articlesData'].keys())), headers=headers)
+    r = requests.post("https://summariz.localtunnel.me/api", data=json.dumps(list(newsResponse['articlesData'].keys())), headers=headers)
     if r.status_code == 200:
         x = r.json()
         i = 0

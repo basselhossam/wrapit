@@ -23,9 +23,12 @@ class DBManager:
         x = 0
         for article in articlesList:
             if 'exSummary' in article and 'ratio' in article and 'abSummary' in article:
-                posts_ref = self.ref.child('sources/' + article['newsApiID'] + '/articles')
-                posts_ref.push().set(article)
-                x = x+1
+                if article['exSummary'] == "[UNK] [UNK] says she will be despite to be despite to take action . she says she will be despite to take action against the next generation . she says she will be despite to get back to the next of the day .":
+                    print("An article exSummary failed")
+                else:
+                    posts_ref = self.ref.child('sources/' + article['newsApiID'] + '/articles')
+                    posts_ref.push().set(article)
+                    x = x+1
             else:
                 print("An article failed")
         return x

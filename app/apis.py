@@ -39,18 +39,15 @@ def getnews():
             newsResponse['articlesData'][url]["ratio"] = s / (len(sens) * 1.0)
         else:
             del newsResponse['articlesData'][url]
-    print "Sending"
     headers = {'content-type': 'application/json'}
     r = requests.post("https://summarizar.localtunnel.me/api", data=json.dumps(list(newsResponse['articlesData'].keys())), headers=headers)
     if r.status_code == 200:
-        print "abSummary Success"
         x = r.json()
         i = 0
         for url in list(newsResponse['articlesData'].keys()):
             newsResponse['articlesData'][url]["abSummary"] = x[i]
             i = i + 1
     else:
-        print "abSummary Failed"
         ret = {'status': 'abSummary Failed'}
         return jsonify(ret)
     ret = {'status': 'Failed'}

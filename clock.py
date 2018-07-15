@@ -5,6 +5,6 @@ sched = BlockingScheduler()
 
 @sched.scheduled_job('interval', minutes=1)
 def timed_job():
-    periodic_task.getnews()
+    print(periodic_task.getnews())
 
 sched.start()

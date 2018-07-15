@@ -1,5 +1,4 @@
 from app import app
-from flask import jsonify
 import requests
 import json
 from app.FrequencySummarizer import FrequencySummarizer
@@ -36,9 +35,8 @@ def getnews():
             i = i + 1
     else:
         ret = {'status': 'abSummary Failed'}
-        print(jsonify(ret))
-        return 
+        return ret
     ret = {'status': 'Failed'}
     if db.addArticles(newsResponse['articlesData'].values()):
         ret = {'status': 'ok', 'summarizedCount': len(newsResponse['articlesData'].values())}
-    print(jsonify(ret))
+    return ret

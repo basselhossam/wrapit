@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from urllib import urlopen
+from urllib.request import urlopen
 
 
 def parse(newsurl):

@@ -22,8 +22,8 @@ class DBManager:
     def addArticles(self,articlesList):
         x = 0
         for article in articlesList:
-            if 'exSummary' in article and 'ratio' in article and 'abSummary' in article:
-                if "[UNK] [UNK]" in article['exSummary']:
+            if 'abSummary' in article and 'ratio' in article and 'abSummary' in article:
+                if "[UNK] [UNK]" in article['abSummary']:
                     print("An article exSummary failed")
                 else:
                     posts_ref = self.ref.child('sources/' + article['newsApiID'] + '/articles')

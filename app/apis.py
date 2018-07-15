@@ -41,7 +41,7 @@ def getnews():
             del newsResponse['articlesData'][url]
     print "Sending"
     headers = {'content-type': 'application/json'}
-    r = requests.post("https://ancient-panda-90.localtunnel.me/api", data=json.dumps(list(newsResponse['articlesData'].keys())), headers=headers)
+    r = requests.post("https://summarizar.localtunnel.me/api", data=json.dumps(list(newsResponse['articlesData'].keys())), headers=headers)
     if r.status_code == 200:
         print "abSummary Success"
         x = r.json()

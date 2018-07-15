@@ -17,7 +17,7 @@ def getnews():
         fs = FrequencySummarizer()
         textsum = fs.summarize(sens, 4)
         s = 0
-        if False != textsum:
+        if False != textsum and len(textsum) > 0:
             for x in textsum:
                 s = s + len(x)
             print(textsum)

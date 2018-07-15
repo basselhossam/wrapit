@@ -20,6 +20,7 @@ def getnews():
         if False != textsum:
             for x in textsum:
                 s = s + len(x)
+            print(textsum)
             newsResponse['articlesData'][url]["exSummary"] = textsum
             newsResponse['articlesData'][url]["category"] = cat
             newsResponse['articlesData'][url]["ratio"] = s / (len(sens) * 1.0)

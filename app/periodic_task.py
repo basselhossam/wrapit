@@ -17,10 +17,9 @@ def getnews():
         fs = FrequencySummarizer()
         textsum = fs.summarize(sens, 4)
         s = 0
-        if False != textsum and len(textsum) > 0:
+        if False != textsum:
             for x in textsum:
                 s = s + len(x)
-            print(textsum)
             newsResponse['articlesData'][url]["exSummary"] = textsum
             newsResponse['articlesData'][url]["category"] = cat
             newsResponse['articlesData'][url]["ratio"] = s / (len(sens) * 1.0)
@@ -37,7 +36,5 @@ def getnews():
     else:
         ret = {'status': 'abSummary Failed'}
         return ret
-    ret = {'status': 'Failed'}
-    if db.addArticles(newsResponse['articlesData'].values()):
-        ret = {'status': 'ok', 'summarizedCount': len(newsResponse['articlesData'].values())}
+    ret = {'status': 'ok', 'summarizedCount': db.addArticles(newsResponse['articlesData'].values())}
     return ret

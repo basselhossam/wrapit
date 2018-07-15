@@ -20,10 +20,15 @@ class DBManager:
             self.ref = db.reference('/')
 
     def addArticles(self,articlesList):
+        x = 0
         for article in articlesList:
-            posts_ref = self.ref.child('sources/' + article['newsApiID'] + '/articles')
-            posts_ref.push().set(article)
-        return True
+            if 'exSummary' in article and 'ratio' in article and 'abSummary' in article:
+                posts_ref = self.ref.child('sources/' + article['newsApiID'] + '/articles')
+                posts_ref.push().set(article)
+                x = x+1
+            else:
+                print("An article failed")
+        return x
 
     def getSummarizedArticles(self):
         sources_ref = self.ref.child('sources')

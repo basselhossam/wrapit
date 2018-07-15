@@ -50,9 +50,7 @@ def getnews():
     else:
         ret = {'status': 'abSummary Failed'}
         return jsonify(ret)
-    ret = {'status': 'Failed'}
-    if db.addArticles(newsResponse['articlesData'].values()):
-        ret = {'status': 'ok', 'summarizedCount': len(newsResponse['articlesData'].values())}
+    ret = {'status': 'ok', 'summarizedCount': db.addArticles(newsResponse['articlesData'].values())}
     return jsonify(ret)
 
 
